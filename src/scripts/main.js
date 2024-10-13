@@ -8,16 +8,16 @@ const dataAtributToNumber = (salary) => {
 
 const sortList = (list) => {
   list
-    .toSorted(
+    .sort(
       (value1, value2) =>
         dataAtributToNumber(value2.dataset.salary) -
         dataAtributToNumber(value1.dataset.salary),
     )
-    .forEach((employee, i) => list[i].closest('ul').appendChild(employee));
+    .forEach((employee, i) => list[i].parentElement.appendChild(employee));
 };
 
 const getEmployees = (list) => {
-  return list.map((employee) => {
+  list.forEach((employee) => {
     return {
       name: employee.innerText,
       position: employee.dataset.position,
