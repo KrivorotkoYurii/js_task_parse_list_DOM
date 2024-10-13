@@ -1,28 +1,19 @@
 'use strict';
 
-const empoyees = [...document.querySelectorAll('li')];
+const employees = [...document.querySelectorAll('li')];
 
-const dataAtributToNumber = (string) => {
-  const arr = string.split('');
-
-  arr.shift();
-
-  const strNormalized = arr.filter((el) => el !== ',').join('');
-
-  return +strNormalized;
+const dataAtributToNumber = (salary) => {
+  return salary.replace(/\D/g, '');
 };
 
 const sortList = (list) => {
-  const parentElement = list[0].closest('ul');
-
   list
-    .sort((value1, value2) => {
-      return (
+    .toSorted(
+      (value1, value2) =>
         dataAtributToNumber(value2.dataset.salary) -
-        dataAtributToNumber(value1.dataset.salary)
-      );
-    })
-    .forEach((employee) => parentElement.appendChild(employee));
+        dataAtributToNumber(value1.dataset.salary),
+    )
+    .forEach((employee, i) => list[i].closest('ul').appendChild(employee));
 };
 
 const getEmployees = (list) => {
@@ -36,5 +27,5 @@ const getEmployees = (list) => {
   });
 };
 
-sortList(empoyees);
-getEmployees(empoyees);
+sortList(employees);
+getEmployees(employees);
